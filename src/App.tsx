@@ -57,10 +57,19 @@ export default function App() {
         const response = await axios.get<{ results: Image[] }>(
           `https://api.unsplash.com/search/photos?query=${query}&page=${page}&client_id=${ACCESS_KEY}`
         );
-        
-        setImages((prevImages) => [...prevImages, ...response.data.results]);
+
+        if (response.data.results.length === 0) {
+          const errorMessage = 'Немає зображень за вашим запитом';
+          setError(errorMessage);
+          toast.error(errorMessage);
+        } else {
+          setImages((prevImages) => [...prevImages, ...response.data.results]);
+          toast.success('Зображення успішно завантажені!');
+        }
       } catch (error) {
-        setError('Помилка при завантаженні зображень');
+        const errorMessage = 'Помилка при завантаженні зображень';
+        setError(errorMessage);
+        toast.error(errorMessage);
       } finally {
         setLoading(false);
       }
