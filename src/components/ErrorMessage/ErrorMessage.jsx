@@ -1,5 +1,3 @@
-import styles from './ImageGallery.module.css';
-
-export default function ErrorMessage({ message }) {
-  return <p className={styles.error}>{message}</p>;
+export default function ErrorMessage() {
+  return <p>Щось пішло не так! Спробуйте ще раз.</p>;
 }

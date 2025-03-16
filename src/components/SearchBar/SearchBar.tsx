@@ -2,12 +2,18 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './SearchBar.module.css';
 
-export default function SearchBar({ onSubmit }) {
+interface SearchBarProps {
+  onSubmit: (query: string) => void;
+}
+
+export default function SearchBar({ onSubmit }: SearchBarProps) {
   const [input, setInput] = useState('');
 
-  const handleChange = (e) => setInput(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (input.trim() === '') {
       toast.error('Введіть текст для пошуку зображень!');
@@ -19,8 +25,7 @@ export default function SearchBar({ onSubmit }) {
 
   return (
     <header className={styles.searchBar}>
-      <form onSubmit={handleSubmit}>
-        <button type="submit">Search</button>
+      <form onSubmit={handleSubmit} className={styles.searchForm}>
         <input
           type="text"
           autoComplete="off"
@@ -28,7 +33,11 @@ export default function SearchBar({ onSubmit }) {
           placeholder="Search images and photos"
           value={input}
           onChange={handleChange}
+          className={styles.searchInput}
         />
+        <button type="submit" className={styles.searchButton}>
+          Search
+        </button>
       </form>
     </header>
   );

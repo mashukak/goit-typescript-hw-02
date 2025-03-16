@@ -1,6 +1,6 @@
 .card {
     width: 100%;
-    height: 250px; /* Fixed height for consistency */
+    height: 250px; 
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -15,7 +15,7 @@
   .image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures images always fill the space */
+    object-fit: cover;
     display: block;
   }
   
